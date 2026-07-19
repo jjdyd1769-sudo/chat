@@ -1,0 +1,398 @@
+/* css/chat-messages.css — صندوق الدردشة وتنسيقات الرسائل (message-item, الأفاتار، الرتب، الرسائل النظامية)
+   (مأخوذ من style.css الأصلي، الأسطر 83-477، بدون أي تغيير في الترتيب) */
+
+/* Chat Box (Messages Display Area) */
+#chat-box { /* This is the ID of the div in chat.html that loads .html */
+  flex-grow: 1; /* This ID container should also grow */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important for flex child overflow */
+}
+
+.chat-box {
+  
+  overflow-y: auto;
+  
+  flex-grow: 1;
+  
+  flex-direction: column;
+  /* هذا هو التعديل الذي سيحل المشكلة */
+  
+}
+
+/* Message Styles */
+/* --- التعديلات لـ .message-item (عنصر الرسالة بالكامل) --- */
+.message-item {
+    display: flex; /* يجعل الصورة الرمزية ومحتوى الرسالة (الاسم، الرتبة، النص) في سطر واحد */
+    align-items: center; /* **الأهم للمحاذاة العمودية:** يجعل الصورة الرمزية، الرتبة، والاسم متوازيين في المنتصف */
+    
+    background-color: white; /* خلفية بيضاء لفقاعة الرسالة */
+    border: 1px solid #ddd; /* حد خفيف جداً */
+    
+    box-shadow: none !important; /* إزالة أي ظل قد يكون موجوداً */
+    color: #000; /* لون نص الرسالة */
+    font-size: 14px; /* حجم خط نص الرسالة */
+    line-height: 1.4; /* ارتفاع سطر نص الرسالة */
+
+    border-bottom: 0px solid #eee; /* خط فاصل خفيف أسفل كل رسالة */
+    margin-left: 0; /* **إزالة المساحة الزائدة على اليسار:** يضمن أن الرسالة تبدأ من حافة صندوق الدردشة في اتجاه RTL */
+    margin-right: 0; /* إزالة أي هامش على اليمين */
+    width: auto; /* يسمح للرسالة بأخذ عرضها الطبيعي ضمن الحاوية */
+    border-radius: 8px; /* حواف دائرية */
+    padding: 6px; /* تباعد داخلي */
+    margin-bottom: 0px; /* تباعد عن الرسائل الأخرى */
+    border-left: 3px solid #000; /* شريط جانبي بلون رمادي */
+}
+
+/* لا تقم بتغيير هذا الجزء إذا كنت تريده */
+
+
+.user-avatar {
+    width: 50px; /* عرض الصورة الرمزية */
+    height: 50px; /* ارتفاع الصورة الرمزية */
+    min-width: 40px; /* يمنع الصورة الرمزية من الانكماش */
+    min-height: 40px; /* يمنع الصورة الرمزية من الانكماش */
+    border-radius: 50%; /* لجعل الصورة دائرية */
+    overflow: hidden; /* لإخفاء أي جزء زائد من الصورة إذا كانت لا تتناسب مع الشكل الدائري */
+    position: relative; /* ضروري إذا كان لديك عناصر داخلها (مثل .avatar-num) */
+
+    margin-left: 2px; /* **المسافة بين الصورة الرمزية ومحتوى الرسالة (الرتبة والاسم)** */
+    margin-right: 0; /* **إزالة المساحة التي كانت تظهر بجانب الصورة الرمزية:** يضمن عدم وجود هامش على اليمين */
+    flex-shrink: 0; /* يمنع الصورة الرمزية من الانكماش إذا كانت المساحة ضيقة */
+
+    display: flex; /* لترتيب محتوى الصورة الرمزية (الصورة الفعلية والرقم) */
+    justify-content: center; /* محاذاة أفقية للمحتوى داخل الصورة الرمزية */
+    align-items: center; /* محاذاة عمودية للمحتوى داخل الصورة الرمزية */
+    font-size: 10px; /* حجم الخط لأي نص داخل الصورة الرمزية (مثل رقم) */
+    color: white; /* لون النص داخل الصورة الرمزية */
+    font-weight: bold; /* وزن الخط للنص داخل الصورة الرمزية */
+}
+
+.user-avatar .profile-image {
+    width: 100%; /* تجعل الصورة تأخذ العرض الكامل للأيقونة */
+    height: 100%; /* تجعل الصورة تأخذ الارتفاع الكامل للأيقونة */
+    object-fit: cover; /* لملء المساحة المتاحة دون تشويه الصورة */
+}
+
+.user-avatar .avatar-num {
+    position: absolute; /* لتموضع الرقم فوق الصورة الرمزية */
+    bottom: -2px; /* المسافة من الأسفل */
+    right: -2px; /* المسافة من اليمين */
+    background-color: rgba(0, 0, 0, 0.5); /* خلفية شبه شفافة للرقم */
+    color: white; /* لون نص الرقم */
+    border-radius: 50%; /* لجعل الرقم دائرياً */
+    width: 18px; /* عرض دائرة الرقم */
+    height: 18px; /* ارتفاع دائرة الرقم */
+    font-size: 10px; /* حجم خط الرقم */
+    display: flex; /* لترتيب محتوى الرقم (النص) */
+    justify-content: center; /* محاذاة أفقية للنص داخل دائرة الرقم */
+    align-items: center; /* محاذاة عمودية للنص داخل دائرة الرقم */
+}
+
+/* Gradient backgrounds for avatars */
+.gradient-pink { background: linear-gradient(45deg, #ff6b6b, #ff006e); }
+.gradient-purple { background: linear-gradient(45deg, #6a11cb, #2575fc); }
+.gradient-green { background: linear-gradient(45deg, #13f1fc, #046bf2); }
+.gradient-gold { background: linear-gradient(45deg, #ffd700, #ffa500); }
+
+
+.message-info {
+    flex-grow: 1;
+    min-width: 0; /* **إضافة مهمة جدًا** */
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.message-name {
+    display: flex; /* يجعل أيقونة الرتبة واسم المستخدم في سطر واحد */
+    align-items: center; /* **محاذاة عمودية:** يضمن أن أيقونة الرتبة والاسم متوازيان في المنتصف */
+    white-space: nowrap; /* يمنع الاسم من الالتفاف إلى سطر جديد إذا كان طويلاً */
+    margin-bottom: 2px; /* مسافة صغيرة تحت الاسم/الرتبة قبل نص الرسالة */
+}
+
+/* User name colors */
+.name-red { color: #e74c3c; }
+.name-blue { color: #3498db; }
+.name-green { color: #27ae60; }
+.name-gold { color: #f39c12; }
+
+.message-name .star-icon {
+  margin-right: 5px; /* Space between name and star */
+  font-size: 16px;
+  color: gold;
+}
+
+
+.message-time {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.message-text {
+  background: #e99eb;
+  padding: 0px 5px;
+  border-radius: 15px;
+  font-size: 16px;
+  max-width: 80%; /* Limit message bubble width */
+  word-wrap: break-word; /* Ensure long words break */
+  display: inline-block; /* Allow padding to wrap content */
+  position: relative;
+  text-align: right; /* Default text alignment for RTL */
+}
+
+/* Badges for message */
+.message-badge {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* Message status */
+.message-status {
+  font-size: 0.7em;
+  color: #777;
+  margin-top: 5px;
+  text-align: left; /* Align status to the left */
+}
+
+/* ... (كود CSS الموجود مسبقاً) ... */
+
+.dots-options {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #999;
+  position: relative; /* مهم لتموضع القائمة المنبثقة داخله */
+}
+/* تنسيق القائمة المنبثقة */
+.message-options-menu {
+  position: absolute;
+  top: 0; /* لجعلها محاذية للجزء العلوي من زر النقاط */
+  left: 0; /* محاذاة يسار القائمة مع يسار زر النقاط */
+  transform: translateX(-100%); /* دفع القائمة إلى اليسار بمسافة تساوي عرضها */
+  /* إذا أردت مسافة إضافية بين القائمة والزر، أضف: margin-left: -5px; */
+  width: 150px; /* تحديد عرض ثابت للقائمة */
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+  display: none; /* إخفاء القائمة بشكل افتراضي */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  padding: 5px 0;
+  text-align: right; /* محاذاة النص داخل القائمة لليمين */
+  overflow: hidden; /* لمنع أي محتوى من تجاوز العرض المحدد */
+}
+
+.message-options-menu.show-options {
+  display: block; /* إظهار القائمة عند إضافة الفئة */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.option-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.option-item:hover {
+  background-color: #f0f2f5;
+}
+
+/* ... (بقية كود CSS) ... */
+
+/* System message styles */
+.system-message {
+  display: flex;
+  align-items: center;
+  margin: 5px 0; /* تم تقليل الهامش لتقريب الرسالة من الرسائل الأخرى */
+  gap: 10px;
+  direction: rtl;
+  justify-content: flex-start;
+}
+ 
+/* ... (بقية الكود بدون تغيير) ... */
+
+
+.system-message-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.system-message-content {
+  display: inline-block;
+  background-color: #f1f1f1;
+  color: #555;
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 10px 18px;
+  border-radius: 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.system-message-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .top-bar {
+    padding: 5px 0;
+    height: 50px; /* Smaller height on mobile */
+  }
+
+  .top-btn {
+    padding: 3px 5px;
+  }
+
+  .top-btn .icon {
+    font-size: 18px;
+  }
+
+  .chat-container {
+    padding-top: 70px; /* Height of top-bar on mobile */
+    padding-bottom: 165px; /* Height of input-bar on mobile + its bottom margin */
+    /* Height is already 100vh on chat-container */
+  }
+
+  .input-bar {
+    height: 50px; /* Smaller height on mobile */
+    margin: 0 15px 15px 15px; /* Adjust margin for mobile fixed position */
+  }
+
+  .chat-box {
+    margin: 0 10px;
+  }
+
+  .message-item {
+    margin-bottom: 0px;
+  }
+
+  .message-text {
+    max-width: 90%;
+  }
+}
+
+/* Desktop specific adjustments for chat container */
+@media (min-width: 769px) {
+  .chat-container {
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    /* No height override needed here as 100vh on chat-container works */
+  }
+
+  .input-bar {
+      /* Keep desktop specific input-bar styling here if needed */
+      margin: 0 15px 15px 15px; /* Desktop margin for fixed input-bar */
+  }
+}
+
+/* Styling for the temporary quote bubble above input field */
+.active-quote-bubble {
+  display: flex; /* لترتيب العناصر داخله (الاسم والنص وزر الإغلاق) */
+  align-items: center;
+  justify-content: space-between; /* لدفع زر الإغلاق إلى اليمين */
+  background-color: #f0f0f0; /* خلفية فاتحة للفقاعة */
+  border-right: 4px solid #4CAF50; /* الخط الجانبي الأخضر */
+  padding: 8px 15px;
+  margin: 0 15px 10px 15px; /* هامش بين الفقاعة وشريط الإدخال */
+  border-radius: 8px;
+  font-size: 0.9em;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* ظل خفيف */
+  position: absolute; /* مهم: ليكون فوق شريط الإدخال */
+  bottom: 100px; /* ارتفاع input-bar (60px) + margin-bottom (15px) */
+  left: 0;
+  right: 0;
+  z-index: 999; /* ليكون فوق عناصر أخرى ولكن تحت الأشرطة الثابتة الرئيسية */
+  direction: rtl; /* لضمان الاتجاه الصحيح */
+  box-sizing: border-box; /* لضمان أن العرض يشمل البادينج */
+}
+
+.active-quote-bubble .quote-content-wrapper {
+  flex-grow: 1; /* للسماح للمحتوى بأخذ المساحة المتاحة */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* لمنع تجاوز المحتوى */
+}
+
+.active-quote-bubble .quote-sender-name {
+  font-weight: bold;
+  color: #075E54; /* نفس لون اسم المرسل في الاقتباس داخل الرسالة */
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-quote-bubble .quote-text-preview {
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-quote-bubble .close-quote-btn {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  color: #888;
+  cursor: pointer;
+  margin-right: 10px; /* مسافة بين زر الإغلاق والمحتوى */
+  padding: 0;
+}
+
+/* New/Updated Styling for quoted messages within the chat bubble */
+.quoted-message {
+  /* Inherit styles from active-quote-bubble for consistency */
+  background-color: #f0f0f0; /* Same as active-quote-bubble */
+  border-right: 4px solid #4CAF50; /* Same green line */
+  padding: 8px 12px; /* Slightly less padding than active-quote-bubble if needed, adjust as desired */
+  margin-bottom: 5px; /* Important: Add space between quote and main message text */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Lighter shadow for in-chat quote */
+  font-size: 0.85em; /* Slightly smaller font size */
+  color: #333;
+  overflow: hidden; /* For ellipsis on content */
+  direction: rtl;
+}
+
+.quoted-message .quoted-sender-name {
+  font-weight: bold;
+  color: #075E54; /* WhatsApp green-ish color */
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quoted-message .quoted-content {
+  color: #666; /* Slightly lighter text for the content */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

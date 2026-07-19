@@ -1,0 +1,274 @@
+/* css/modal-private-chat-list.css — نافذة قائمة المحادثات الخاصة (private-chat-modal-strip)
+   (مأخوذ من style.css الأصلي، الأسطر 613-883، بدون أي تغيير في الترتيب) */
+
+/* Private Chat Modal Strip */
+/* Private Chat Modal Strip */
+.private-chat-modal-strip {
+  position: fixed;
+  top: 60px;
+  right: 5px;
+  background-color: #fff;  /* ✨ أضف هذا السطر ✨ */
+  border-radius: 10px;
+  /* ... بقية الكود ... */
+
+  box-shadow: none; /* ظل المودال */
+  z-index: 1000; /* تأكد من أنه يظهر فوق العناصر الأخرى */
+  
+  /* **خصائص جعل المودال كبيراً ولكن بحجم معتدل** */
+  /* **خصائص جعل المودال أصغر حجماً** */
+width: 85%; /* يمكنك تقليل هذه النسبة أيضاً */
+max-width: 280px; /* **القيمة الجديدة للحد الأقصى للعرض** */
+  height: auto; /* الارتفاع يتحدد تلقائياً بناءً على المحتوى */
+  max-height: calc(100vh - 100px - 85px);
+ /* **الحد الأقصى للارتفاع (تم تقليله من 80px إلى 100px)** */
+  /* هذا يترك مساحة أكبر في الأسفل و الأعلى */
+
+  overflow-y: auto; /* لإضافة شريط تمرير عمودي إذا كان المحتوى يتجاوز الارتفاع الأقصى */
+  
+  display: none; /* مخفي افتراضياً، سيتم إظهاره بالـ JS */
+  padding: 0px; /* هامش داخلي */
+  transform-origin: top right; /* لتأثير الحركة يبدأ من الزاوية العلوية اليمنى */
+  animation: fadeInFromTopRight 0.2s ease-out; /* اسم الحركة */
+border: 1px solid #ccc; /* إضافة حدود صلبة بلون رمادي فاتح */
+  border-radius: 8px; /* جعل الحواف دائرية */
+}
+
+.private-chat-modal-strip.show {
+  display: block; /* لإظهار المودال */
+}
+
+.private-chat-modal-strip .modal-header,
+.online-users-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #f0f0f0; /* لون خلفية للرأس */
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    position: sticky; /* لجعل الرأس ثابتًا */
+    top: 0; /* يلتصق بالأعلى */
+    z-index: 1; /* ليكون فوق المحتوى */
+}
+
+.private-chat-modal-strip .modal-header h3,
+.online-users-modal .modal-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* زر الإغلاق */
+..private-chat-modal-strip .close-btn,
+.online-users-modal .close-btn {
+    background-color: #f1f1f1 !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    font-size: 16px !important;
+    color: #666 !important;
+}
+
+.private-chat-modal-strip .close-btn:hover,
+.online-users-modal .close-btn:hover {
+    background-color: #e0e0e0 !important;
+    color: #333 !important;
+}
+
+
+/* قائمة جهات الاتصال داخل المودال الخاص */
+.private-chat-modal-strip .private-chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* تمكين التمرير عند تجاوز المحتوى للارتفاع الأقصى */
+    /* ليأخذ المساحة المتاحة بعد الـ header */
+     /* مسافة داخلية من الأسفل */
+    max-height: 500px; 
+}
+
+/* تعديل الـ keyframes لتناسب الموضع الجديد */
+@keyframes fadeInFromTopRight {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px); /* يبدأ أصغر قليلاً وأعلى */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0); /* يظهر بالحجم الطبيعي في مكانه */
+  }
+}
+
+.private-chat-modal-strip ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.private-chat-modal-strip li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px; 
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  direction: rtl; 
+  border-bottom: 1px solid #eee; 
+}
+.private-chat-modal-strip li:last-child {
+    border-bottom: none; 
+}
+
+
+.private-chat-modal-strip li:hover {
+  background-color: #f0f2f5;
+}
+
+.private-chat-modal-strip .user-avatar-small {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  object-fit: cover;
+  margin-inline-end: 15px; 
+  flex-shrink: 0; 
+}
+
+.private-chat-modal-strip .user-name {
+  font-weight: bold;
+  color: #333;
+  font-size: 1.1em; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.private-chat-modal-strip .no-users-message {
+  padding: 15px;
+  text-align: center;
+  color: #777;
+  font-size: 1.1em; 
+}
+
+.private-chat-modal-strip .close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.8em; 
+    cursor: pointer;
+    color: #888;
+    z-index: 10; 
+}
+
+/* ... (الكود الموجود مسبقاً) ... */
+
+/* تنسيق رسالة "صندوق رسائلك فارغ" مع الصورة */
+.private-chat-modal-strip .empty-chat-message {
+    display: flex; /* لجعل العناصر (الصورة والنص) تترتب عمودياً */
+    flex-direction: column; /* لترتيب العناصر عمودياً */
+    align-items: center; /* توسيط العناصر أفقياً */
+    justify-content: center; /* توسيط العناصر عمودياً (إذا كان هناك مساحة كافية) */
+    text-align: center;
+    padding: 20px 10px; /* مسافة داخلية أكبر */
+    color: #888;
+    min-height: 100px; /* لتوفير مساحة كافية للصورة والنص */
+}
+
+.private-chat-modal-strip .empty-chat-icon {
+    width: 50px; /* حجم الصورة */
+    height: 50px;
+    object-fit: contain; /* للتأكد من أن الصورة تظهر بالكامل دون قص */
+    margin-bottom: 0px; /* مسافة بين الصورة والنص */
+     /* لجعل الصورة أبهت قليلاً */
+}
+
+.private-chat-modal-strip .empty-chat-message p {
+    margin: 0; /* إزالة الهامش الافتراضي للفقرة */
+    font-size: .8em;
+    line-height: 1.4;
+}
+
+.private-chat-list .delete-contact-btn {
+  /* ✨ زيادة حجم الخط لتبدو الأيقونة أكبر */
+  font-size: 24px;
+  
+  /* ✨ تغيير اللون إلى الأسود */
+  color: #000;
+  
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin-left: 5px;
+  position: absolute;
+  left: 10px;
+}
+
+/* ✨ تعديل لون التمرير عند وضع المؤشر عليها */
+.private-chat-list .delete-contact-btn:hover {
+  color: #ff0000; /* يمكنك ترك هذا اللون أحمر، أو تغييره إلى أي لون آخر */
+}
+
+
+
+/* **تعديل الـ media queries لتناسب الحجم الجديد** */
+@media (max-width: 768px) {
+    .private-chat-modal-strip {
+        width: 90%; /* عرض بنسبة 90% */
+        right: 10px; /* تقليل المسافة من اليمين قليلاً */
+        top: 65px; 
+        max-height: calc(100vh - 90px); /* ضبط الارتفاع */
+    }
+    .private-chat-modal-strip .user-avatar-small {
+        width: 35px;
+        height: 35px;
+        margin-inline-end: 10px;
+    }
+    .private-chat-modal-strip .user-name {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 500px) {
+    .private-chat-modal-strip {
+        width: calc(100% - 20px); /* يملأ العرض مع 10px هامش من كل جانب */
+        right: 10px; /* المسافة من اليمين */
+        top: 60px;
+        max-height: calc(100vh - 80px);
+    }
+    .private-chat-modal-strip .user-avatar-small {
+        width: 30px;
+        height: 30px;
+        margin-inline-end: 8px;
+    }
+    .private-chat-modal-strip .user-name {
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 360px) {
+    .private-chat-modal-strip {
+        width: calc(100% - 20px);
+        right: 10px;
+        top: 55px;
+        max-height: calc(100vh - 70px);
+        padding: 10px;
+    }
+    .private-chat-modal-strip li {
+        padding: 10px 10px;
+    }
+    .private-chat-modal-strip .user-avatar-small {
+        width: 28px;
+        height: 28px;
+        margin-inline-end: 5px;
+    }
+    .private-chat-modal-strip .user-name {
+        font-size: 0.9em;
+    }
+}
+

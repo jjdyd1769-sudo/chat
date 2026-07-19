@@ -1,0 +1,85 @@
+/* css/base.css — الأنماط العامة الأساسية (body, chat-container, إلخ)
+   (مأخوذ من style.css الأصلي، الأسطر 1-82، بدون أي تغيير في الترتيب) */
+
+/* General Styles (Keep as is, just for context) */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f2f5;
+  direction: rtl;
+  color: #333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overscroll-behavior: none;
+}
+
+.top-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.top-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-btn .icon {
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+
+.profile-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-profile-btn {
+  position: relative;
+}
+
+.avatar-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background-color: #f00; /* Example: Red for new notifications */
+  color: white;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #333;
+}
+
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f0f2f5;
+  box-sizing: border-box;
+  padding-top: 130px; /* ارتفاع الشريط العلوي */
+  padding-bottom: 110px; /* ارتفاع شريط الإدخال + السفلي */
+  min-height: 100vh;   /* يغطي الشاشة كاملة */
+  height: 100dvh;      /* يدعم الهواتف الحديثة */
+}
+

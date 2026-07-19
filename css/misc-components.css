@@ -1,0 +1,781 @@
+/* css/misc-components.css — مكونات متفرقة: الشريط السفلي، النوافذ المنبثقة الإضافية (تسجيل، رفع ملفات، غرف، بحث...)
+   (مأخوذ من style.css الأصلي، الأسطر 2332-3109، بدون أي تغيير في الترتيب) */
+
+/* ---------------------------------------------------------------------- */
+/* أنماط الشريط السفلي الجديد (منفصل) */
+/* ---------------------------------------------------------------------- */
+.bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* تم تغييرها لتوجيه المحتوى إلى اليسار */
+    padding: 0 15px;
+    background: linear-gradient(to right, #4a148c, #8e24aa);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    z-index: 1000;
+    height: 55px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+.bottom-bar .bottom-buttons-container {
+    display: flex;
+    flex-grow: 0; /* تم تغييرها لتسمح بتمدد الحاوية */
+    justify-content: flex-start; /* تم تغييرها لتوجيه الأزرار إلى اليسار */
+    align-items: center;
+}
+
+.bottom-bar .bottom-btn {
+    background: none;
+    border: none;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 9px;
+    padding: 0 5px;
+    transition: color 0.2s ease;
+    margin-right: 8px; /* تم تغييرها من left إلى right */
+}
+
+.bottom-bar .bottom-btn:hover {
+    color: #f3e5f5;
+}
+
+.bottom-bar .bottom-btn i {
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+/* تنسيق الأزرار الجديدة في رأس نافذة الدردشة الخاصة */
+.private-chat-dialog .header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* مسافة بين الأزرار */
+}
+
+/* تنسيق زر التصغير والإغلاق */
+.private-chat-dialog .minimize-private-chat-btn,
+.private-chat-dialog .close-private-chat-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1; /* لتحسين المحاذاة */
+    padding: 0 5px;
+}
+
+.private-chat-dialog .minimize-private-chat-btn:hover,
+.private-chat-dialog .close-private-chat-btn:hover {
+    color: #f00; /* لون أحمر عند التمرير */
+}
+
+/* تنسيق صورة المحادثة المصغرة في الشريط السفلي */
+.bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* لتبدأ من اليسار */
+    gap: 10px;
+    padding: 0 10px;
+    height: 50px;
+    background-color: #333; /* لون الشريط السفلي */
+}
+
+.minimized-chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #555;
+    transition: transform 0.2s;
+}
+
+.minimized-chat-avatar:hover {
+    transform: scale(1.1);
+}
+
+.minimized-chat-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.minimized-chat-avatar {
+    position: relative; 
+}
+
+.minimized-chat-avatar.has-new-messages::before {
+    content: '';
+    position: absolute;
+    top: -2px; 
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid #333; 
+    z-index: 10;
+}
+
+.mentioned-user {
+  font-weight: bold;
+  color: #ffcc00; /* لون ذهبي */
+  background-color: rgba(255, 204, 0, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* تنسيقات الصور داخل رسالة الدردشة */
+/* تنسيقات الصور داخل رسالة الدردشة */
+.message-info .message-image-container {
+  /* هنا سنقوم بتحديد حجم أصغر */
+  max-width: 100px; /* يمكنك تجربة قيم مختلفة مثل 150px أو 250px */
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.message-info .message-image-container .chat-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* تنسيقات المودال لعرض الصورة بحجم كبير */
+#imageModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+#imageModal .modal-content {
+  margin: auto;
+  display: block;
+  width: 90%;
+  max-width: 700px;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+#imageModal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+#imageModal .close-btn:hover,
+#imageModal .close-btn:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* js/style.css */
+
+/* خلفية المودال (نافذة منبثقة) */
+/* خلفية النافذة المنبثقة (Modal Overlay) */
+.image-modal-overlay {
+    display: none; /* إخفاء المودال بشكل افتراضي */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* خلفية سوداء شبه شفافة */
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* محتوى النافذة المنبثقة (Modal Content) */
+.image-modal-content {
+    position: relative;
+    max-width: 95%; /* تم زيادة العرض قليلاً */
+    max-height: 95%; /* تم زيادة الارتفاع قليلاً */
+    background-color: transparent; /* جعل الخلفية شفافة */
+    padding: 0; /* إزالة الحشو الداخلي */
+    border-radius: 0; /* إزالة الحواف المنحنية */
+    box-shadow: none; /* إزالة الظل */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* الصورة داخل النافذة المنبثقة */
+#modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+/* زر الإغلاق */
+.image-modal-overlay .close-btn {
+    position: fixed; /* جعله ثابتاً في مكانه على الشاشة */
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2.5em;
+    color: white;
+    cursor: pointer;
+    z-index: 2002;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.image-modal-overlay .close-btn:hover {
+    opacity: 1;
+}
+
+/* زر التحميل */
+.image-modal-overlay .download-btn {
+    position: fixed; /* جعله ثابتاً في مكانه على الشاشة */
+    top: 20px;
+    right: 70px; /* تم تعديل الموضع ليظهر بجانب زر الإغلاق */
+    background: none;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1.1em;
+    cursor: pointer;
+    z-index: 2002;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.image-modal-overlay .download-btn:hover {
+    opacity: 1; /* يصبح أكثر وضوحاً عند التحويم */
+    background-color: rgba(255, 255, 255, 0.1); /* إضافة خلفية خفيفة عند التحويم */
+}
+
+.image-modal-overlay .download-btn i {
+    margin-inline-end: 5px;
+}
+
+.plus-button-container {
+    position: relative;
+}
+
+.options-menu {
+    position: absolute;
+    bottom: calc(100% + 5px); /* ضع القائمة فوق زر الزائد بمسافة 5px */
+    left: 0;
+    display: none; /* إخفاء القائمة افتراضياً */
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    padding: 2px 15px;
+    background-color: #ffffff; /* لون خلفية منبثق */
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.options-menu.show-menu {
+    display: flex; /* إظهار القائمة */
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/*
+استبدل الكود القديم بهذا الكود
+*/
+
+.options-menu .option-btn {
+    width: 30px;
+    height: 45px; /* هذا السطر لن يؤثر إلا على الأزرار داخل قائمة الخيارات */
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    background-color: var(--input-bg-color);
+    border: none;
+    border-radius: var(--border-radius-circle);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-btn:hover {
+    background-color: var(--button-hover-bg);
+}
+
+.option-btn i {
+    /* تلوين الأيقونات حسب وظيفتها */
+    color: var(--secondary-color); /* لون الأيقونات الافتراضي */
+}
+
+#upload-media-btn i {
+    color: #007bff; /* أيقونة الرفع باللون الأخضر */
+}
+
+#music-btn i {
+    color: #4a148c; /* أيقونة الموسيقى باللون الأزرق */
+}
+
+/* تنسيقات شريط التقدم */
+.upload-progress-container {
+    position: fixed;
+    top: 75px;
+    left: 10px;
+    width: 250px;
+    height: 30px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 100%;
+    background-color: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0;
+    background-color: #4CAF50;
+    transition: width 0.3s ease;
+}
+
+.cancel-upload-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+/* مودال كلمة المرور للغرفة المغلقة */
+.modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content.password-modal-content {
+    background: #fff;
+    margin: auto;
+    padding: 25px 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.15);
+    max-width: 350px;
+    width: 100%;
+    position: relative;
+}
+
+.modal-content.password-modal-content h4 {
+    margin: 0 0 18px 0;
+    font-size: 1.2em;
+    color: #7c3aed;
+    text-align: center;
+}
+
+.modal-content.password-modal-content .close {
+    position: absolute;
+    top: 11px;
+    right: 12px;
+    font-size: 1.5em;
+    color: #888;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.password-modal-content .form-group {
+    margin-bottom: 14px;
+}
+
+.password-modal-content label {
+    font-size: 0.95em;
+    color: #444;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.password-modal-content input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.password-modal-content .submit-btn {
+    background: #7c3aed;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 0;
+    width: 100%;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s;
+}
+.password-modal-content .submit-btn:hover {
+    background: #5c1ed4;
+}
+
+.modal-msg {
+    margin-top: 10px;
+    color: #e53e3e;
+    text-align: center;
+    font-size: 0.98em;
+    min-height: 18px;
+}
+
+/* تنسيقات الأزرار في الشريط السفلي لتشابه الأزرار العلوية */
+.bottom-bar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    background: none; /* إزالة لون الخلفية الافتراضي للزر */
+    border: none; /* إزالة حدود الزر */
+}
+
+.bottom-bar-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bottom-bar-btn .icon {
+    font-size: 20px;
+    margin-bottom: 3px;
+    color: #fff; /* لون الأيقونة */
+}
+
+.bottom-bar-btn .btn-text {
+    font-size: 10px;
+    color: #fff; /* لون النص */
+    white-space: nowrap;
+}
+
+/* تنسيقات المودال */
+.registration-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* جعل الخلفية شفافة أو بلون خفيف لتركيز المستخدم على المودال */
+  background-color: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  padding: 20px; /* إضافة هامش خارجي على المودال نفسه */
+  box-sizing: border-box; /* لضمان أن الـ padding لا يزيد العرض الكلي */
+}
+
+.registration-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.registration-modal-content {
+  /* تغيير الخلفية للون الأبيض */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  /* تغيير لون الظل ليتناسب مع الخلفية الفاتحة */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+  /* تغيير لون النص للون الداكن ليظهر على الخلفية البيضاء */
+  color: #333;
+  text-align: center;
+}
+
+.registration-modal.show .registration-modal-content {
+  transform: translateY(0);
+}
+
+.registration-modal-content h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  /* تغيير لون العنوان */
+  color: #7289da;
+}
+
+/* تنسيقات المودال (التعديلات على الأجزاء ذات الصلة فقط) */
+
+.form-group {
+  margin-bottom: 20px;
+  /* ✨ إزالة الـ Flexbox */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  text-align: right; /* لمحاذاة النص على اليمين */
+}
+
+.form-group label {
+  /* ✨ التغيير الرئيسي هنا: جعل الـ label يظهر ككتلة */
+  display: block; 
+  text-align: right;
+  margin-bottom: 5px;
+  width: auto; /* إزالة العرض الثابت */
+  color: #555;
+}
+
+.form-group input {
+  width: 100%; /* تأكد من أن الحقل يملأ العرض المتاح */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.register-submit-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7289da;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.register-submit-btn:hover {
+  background-color: #677bc4;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  /* تغيير لون زر الإغلاق */
+  color: #555; 
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+/* أضف هذه الأنماط في ملف styles.css */
+#message-input:disabled {
+    background-color: #f0f2f5;
+    cursor: not-allowed;
+    color: #a0a0a0;
+}
+
+.send-btn:disabled,
+.emoji-btn-circle:disabled,
+.plus-btn-circle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* تنسيق الحاوية الرئيسية للقائمة */
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* تنسيق التسمية (Label) */
+.form-group label {
+    font-size: 1rem;
+    color: #4b5563; /* لون رمادي داكن */
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* تنسيق قائمة الاختيار نفسها */
+#mute-duration-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    color: #374151;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    appearance: none; /* إخفاء شكل القائمة الافتراضي للمتصفح */
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+/* تأثير عند التركيز (Focus) على القائمة */
+#mute-duration-select:focus {
+    border-color: #4f46e5; /* لون أزرق عند التركيز */
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* تنسيق خيارات القائمة (Options) */
+#mute-duration-select option {
+    background-color: #ffffff;
+    color: #374151;
+    padding: 0.5rem 1rem;
+}
+
+/* أنماط رسائل التنبيه المنبثقة */
+.app-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    
+    /* هذا هو التعديل الأساسي */
+    z-index: 9999; /* قيمة عالية جدًا لضمان ظهورها فوق كل شيء */
+    
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* لون الخلفية للرسائل الناجحة */
+.app-notification.success {
+    background-color: #10b981; /* أخضر */
+}
+
+/* عند الإخفاء */
+.app-notification.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+}
+
+/* style.css */
+
+/* أنماط إضافية لتوافق شريط الإدخال مع نافذة الدردشة الخاصة */
+
+/* إزالة الأنماط القديمة لمنطقة الإدخال الخاصة */
+.private-chat-input-area {
+    display: none;
+}
+
+/* تطبيق أنماط شريط الإدخال العام على النسخة الخاصة مع تعديلات */
+.private-chat-dialog .input-bar {
+    /* تجاوز الأنماط الخاصة بالموضع الثابت */
+    position: relative; /* بدلاً من fixed */
+    bottom: auto;
+    width: 100%; /* ليمتد بعرض الحاوية */
+    left: auto;
+    right: auto;
+    z-index: auto;
+    margin: 0; /* إزالة الهوامش الخارجية */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05); /* ظل أخف */
+    border-top: 1px solid #eee;
+    height: auto; /* السماح للارتفاع بأن يكون تلقائياً */
+    padding: 8px; /* إضافة padding لتحسين المظهر */
+    box-sizing: border-box;
+}
+
+.private-chat-dialog .input-bar .input-field-container {
+    height: 40px;
+    padding: 0 15px;
+}
+
+.private-chat-dialog .input-bar .send-btn,
+.private-chat-dialog .input-bar .plus-btn-circle,
+.private-chat-dialog .input-bar .emoji-btn-circle {
+    box-shadow: none; /* إزالة الظل من الأزرار داخل الخاص */
+    border: 1px solid #ddd;
+}
+
+/* تنسيق الصور في الدردشة الخاصة */
+.private-chat-image {
+  width: 150px; /* أو أي عرض ثابت تفضله */
+  height: 150px; /* أو أي ارتفاع ثابت تفضله */
+  border-radius: 8px; /* للحصول على حواف دائرية */
+  margin-top: 8px; /* للحفاظ على المسافة */
+  object-fit: cover; /* لضمان ملء الصورة للمساحة دون تشوه */
+}
+
+/* تنسيق حقل الإدخال في الدردشة الخاصة */
+.private-chat-dialog #private-message-input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  padding: 8px 12px; /* تم تقليل المسافة الداخلية هنا */
+  font-size: 14px; /* تم تصغير حجم الخط */
+  color: #333;
+  outline: none;
+  font-family: inherit;
+}
+

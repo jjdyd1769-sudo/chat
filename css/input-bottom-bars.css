@@ -1,0 +1,137 @@
+/* css/input-bottom-bars.css — رسائل الانضمام + شريط الإدخال (input-bar)
+   (مأخوذ من style.css الأصلي، الأسطر 2198-2331، بدون أي تغيير في الترتيب) */
+
+/* ---------------------------------------------------------------------- */
+/* أنماط رسائل الانضمام الملونة */
+/* ---------------------------------------------------------------------- */
+.message-item .join-message-text {
+    background-color: #d1c4e9; /* لون بنفسجي فاتح للخلفية */
+    color: #4a148c; /* لون النص بنفسجي غامق */
+    font-weight: bold;
+    border: 1px solid #9575cd;
+}
+
+
+
+/* ---------------------------------------------------------------------- */
+/* أنماط شريط الإدخال الجديد بخلفية بيضاء */
+/* ---------------------------------------------------------------------- */
+.input-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background: white; /* تم تغيير الخلفية إلى الأبيض */
+    border-top: 1px solid #ddd; /* تم تغيير لون الحد الفاصل ليكون أفتح */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* تم تعديل الظل ليكون أخف */
+    position: fixed;
+    bottom: 55px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: 50px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* الأزرار العادية داخل شريط الإدخال */
+.input-bar .icon-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #4a148c; /* تم تغيير لون الأيقونات إلى البنفسجي */
+    cursor: pointer;
+    padding: 6px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.input-bar .icon-btn:hover {
+    transform: scale(1.1);
+    color: #6a1b9a; /* لون أغمق عند التحويم */
+}
+
+/* حاوية حقل الإدخال */
+.input-bar .input-field-container {
+    flex-grow: 1;
+    margin: 0 5px;
+    background-color: #f0f2f5; /* لون رمادي فاتح للخلفية */
+    border-radius: 20px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* حقل الإدخال نفسه */
+.input-bar #message-input {
+    flex-grow: 1;
+    border: none;
+    background: none;
+    font-size: 14px;
+    outline: none;
+    padding: 0;
+    color: #333;
+    height: 100%;
+}
+
+/* زر الإرسال *//* زر الإرسال */
+.input-bar .send-btn {
+    background-color: white; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* إضافة خط أسود بدلاً من الظل */
+    border: 1px solid black; 
+    font-size: 16px;
+    color: #4a148c; 
+    /* إزالة الظل */
+    box-shadow: none; 
+    margin-right: 5px;
+}
+
+/* إزالة تأثير التغيير عند التحويم أو النقر */
+.input-bar .send-btn:hover,
+.input-bar .send-btn:active,
+.input-bar .send-btn:focus {
+    background-color: white; 
+    border: 1px solid black; /* نضمن أن الحدود لا تتغير */
+    box-shadow: none; /* نضمن أن الظل لا يظهر */
+    outline: none; /* لإزالة الإطار الذي يظهر عند التركيز */
+}
+
+/* أزرار الزائد والإيموجي */
+.input-bar .plus-btn-circle,
+.input-bar .emoji-btn-circle {
+    background-color: white; 
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* إضافة خط أسود بدلاً من الظل */
+    border: 1px solid black; 
+    font-size: 16px;
+    color: #4a148c; 
+    /* إزالة الظل */
+    box-shadow: none; 
+    margin-left: 5px;
+}
+
+/* إزالة تأثير التغيير عند التحويم أو النقر */
+.input-bar .plus-btn-circle:hover,
+.input-bar .emoji-btn-circle:hover,
+.input-bar .plus-btn-circle:active,
+.input-bar .emoji-btn-circle:active,
+.input-bar .plus-btn-circle:focus,
+.input-bar .emoji-btn-circle:focus {
+    background-color: white; 
+    border: 1px solid black; /* نضمن أن الحدود لا تتغير */
+    box-shadow: none; /* نضمن أن الظل لا يظهر */
+    outline: none; 
+}
+
+

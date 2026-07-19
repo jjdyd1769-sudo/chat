@@ -1,0 +1,365 @@
+/* css/modal-user-info-dialog.css — نافذة معلومات المستخدم + نافذة الدردشة الخاصة (private-chat-dialog)
+   (مأخوذ من style.css الأصلي، الأسطر 884-1245، بدون أي تغيير في الترتيب) */
+
+/* User Info Modal (when clicking on user avatar/name in chat) */
+/* الكود الذي أرسلته، تم تعديله ليعمل بشكل صحيح */
+/* @import for Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Almarai:wght@400;700&display=swap');
+
+/* Base Styles (No Change) */
+.user-info-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.user-info-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-info-modal .modal-content {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 200px;
+    max-width: 250px;
+    max-height: 350px;
+    overflow-y: auto;
+    color: #333;
+    position: relative;
+    font-family: 'Almarai', sans-serif;
+    z-index: 2; /* Increased z-index for the entire content */
+}
+
+/* Header with Overlay for better text readability */
+.user-info-modal .user-profile-header {
+    width: 100%;
+    height: 230px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 1; /* z-index is lower than the modal content */
+}
+
+/* Overlay to darken background image and improve text contrast */
+.user-info-modal .user-profile-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 2;
+}
+
+.user-info-modal .profile-header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Close button - now with a better color for contrast */
+.user-info-modal .close-button {
+    position: absolute;
+    top: 15px;
+    right: auto; 
+    left: 15px; 
+    font-size: 2em;
+    color: #fff; /* White color */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Stronger shadow for readability */
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 4; /* Higher z-index to be on top of overlay */
+}
+
+.user-info-modal .close-button:hover {
+    color: #eee;
+    transform: rotate(90deg);
+}
+
+/* User avatar */
+.user-info-modal .user-avatar-large {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%; 
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #fff;
+    z-index: 3; /* Higher z-index to be on top of avatar */
+    position: relative;
+    margin-top: 15px;
+}
+
+/* User name - improved font and shadow */
+.user-info-modal .user-name-display {
+    font-family: 'Tajawal', sans-serif; /* A more elegant font */
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Added shadow for better contrast */
+    z-index: 3;
+    position: relative;
+    transform: translateY(0px);
+}
+
+/* Age and Gender info - improved font and shadow */
+.user-info-modal .user-age-gender-info {
+    font-family: 'Almarai', sans-serif;
+    font-size: 0.8em; 
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Added shadow for contrast */
+    margin-top: 5px; 
+    margin-bottom: 0px; 
+    z-index: 3; 
+    position: relative; 
+    transform: translateY(-30px); 
+}
+
+/* Rank info - adjusted position */
+.user-info-modal .user-rank-info {
+    z-index: 3;
+    position: relative;
+    transform: translateY(-20px); 
+}
+
+/* Buttons */
+.user-info-modal .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #eee;
+    padding-top: 5px; /* Adjusted padding-top */
+    margin-top: 5px; /* Adjusted margin-top */
+    z-index: 3; /* Increased z-index for buttons */
+    position: relative;
+}
+
+.user-info-modal .modal-button {
+    background: #e9ecef;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    font-family: 'Almarai', sans-serif;
+}
+
+.user-info-modal .modal-button:hover {
+    background-color: #dee2e6;
+    transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------------- */
+/* أنماط مودال الدردشة الفردية الجديدة (محدثة) */
+/* ---------------------------------------------------------------------- */
+
+.private-chat-dialog {
+    /* الخصائص الحالية */
+    position: fixed;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 55vh;
+    max-height: 80vh;
+    background-color: #f9f9f9;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    /* ✨ التعديلات هنا: */
+    /* إزالة تأثير الانزلاق */
+    transform: none; 
+    /* إضافة تأثير شفافية وتوسيع بسيط */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* إخفاء النافذة في البداية */
+    opacity: 0;
+    visibility: hidden;
+}
+
+.private-chat-dialog.show {
+    /* ✨ التعديلات هنا: */
+    /* جعلها مرئية بالكامل */
+    opacity: 1;
+    visibility: visible;
+    /* إضافة تأثير توسيع بسيط عند الظهور */
+    transform: scale(1);
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* تعديل رأس المودال ليتناسب مع العرض الكامل */
+/* ---------------------------------------------------------------------- */
+.private-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px; /* تم التعديل: تصغير الشريط العلوي أكثر */
+    background-color: #4A148C;
+    color: white;
+    border-bottom: 1px solid #ddd;
+    flex-direction: row;
+    cursor: pointer;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.private-user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.private-chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 0;
+    border: 2px solid white;
+}
+
+.private-chat-username {
+    font-weight: bold;
+    font-size: 1.1em;
+    flex-grow: 1;
+}
+
+.close-private-chat-btn {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    color: white;
+    cursor: pointer;
+    padding: 0 5px;
+    margin-left: 0;
+}
+
+/* كود إضافي لرفع زر التصغير - افترضنا وجود هذا الزر */
+.collapse-private-chat-btn {
+    position: relative;
+    top: -3px; /* رفع الزر قليلاً للأعلى */
+}
+
+
+.private-chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.private-message-item {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 18px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.private-message-item.sent {
+    align-self: flex-end;
+    background-image: linear-gradient(to right, #4c96d7, #8ecae6);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.private-message-item.received {
+    align-self: flex-start;
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+    color: white;
+    border-bottom-left-radius: 4px;
+}
+
+
+.private-chat-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+
+.private-chat-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    margin-left: 10px;
+    font-size: 1em;
+}
+
+.private-chat-send-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.private-chat-send-btn:hover {
+    background-color: #0056b3;
+}
+
+@keyframes pulse-notification {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.message-name .rank-icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.message-name strong {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 15px;
+    margin-right: 4px;
+}
+

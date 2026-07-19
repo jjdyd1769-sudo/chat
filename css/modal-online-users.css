@@ -1,0 +1,955 @@
+/* css/modal-online-users.css — نافذة المستخدمين المتصلين (online-users-modal) والرتب
+   (مأخوذ من style.css الأصلي، الأسطر 1246-2197، بدون أي تغيير في الترتيب) */
+
+/* js/style.css */
+
+/* أنماط مودال المستخدمين المتصلين */
+/* النمط الأساسي للمودال */
+.online-users-modal {
+    position: fixed;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    max-width: 250px; /* عرض أقصى لمودال المتصلين */
+    max-height: 80vh; /* ارتفاع أقصى لمودال المتصلين */
+    overflow: hidden; /* لمنع المحتوى من تجاوز الحدود */
+    top: 60px;
+}
+
+.online-users-modal .online-users-list {
+    flex-grow: 1;
+    overflow-y: auto; /* السماح بالتمرير داخل القائمة */
+    padding-top: 5px; /* للحفاظ على مسافة بعد الرأس */
+}
+
+/* رأس المودال لجعله ثابتًا */
+.online-users-modal .modal-header {
+    background-color: #f8f8f8; /* خلفية خفيفة للرأس */
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee; /* خط فاصل بين الرأس والقائمة */
+    display: flex;
+    justify-content: space-between; /* لتباعد العنوان وزر الإغلاق */
+    align-items: center;
+    position: sticky; /* لجعل الرأس ثابتًا عند التمرير */
+    top: 0; /* يلتصق بالأعلى داخل المودال */
+    z-index: 2; /* للتأكد من أنه فوق قائمة المستخدمين عند التمرير */
+    border-top-left-radius: 15px; /* للحفاظ على حدود المودال المستديرة */
+    border-top-right-radius: 15px; /* للحفاظ على حدود المودال المستديرة */
+}
+
+.online-users-modal .modal-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.online-users-modal .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.online-users-modal .close-btn:hover {
+    color: #333;
+}
+
+/* قائمة المستخدمين القابلة للتمرير */
+.online-users-modal .online-users-list {
+    flex-grow: 1; /* للسماح للقائمة بأخذ المساحة المتبقية داخل المودال */
+    overflow-y: auto; /* جعل القائمة قابلة للتمرير عمودياً */
+    padding: 10px 0; /* هامش داخلي للقائمة */
+}
+
+/* عناصر المستخدمين الفردية */
+/* js/main.js */
+/* تنسيقات جديدة لنافذة المستخدمين المتصلين */
+
+/* عناصر المستخدمين الفردية */
+/* --- ضمان ثبات مكان الرتبة بجانب اسم المستخدم في مودال المتصلين --- */
+.online-users-modal .user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    gap: 8px;
+}
+
+.online-users-modal .user-avatar-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.online-users-modal .user-main-info {
+    /* الخصائص الحالية */
+    flex: 1 1 0%;
+    min-width: 0;
+    overflow: hidden;
+
+    /* التغييرات */
+    display: flex;
+    flex-direction: column; /* هذا هو التعديل الرئيسي */
+    justify-content: center;
+}
+
+.online-users-modal .user-name {
+    font-weight: bold;
+    color: #444;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.online-users-modal .user-status {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.online-users-modal .user-rank-box {
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.online-users-modal .user-rank-image {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin: 0;
+}
+
+/* نمط الرتبة */
+.online-users-modal .user-rank {
+    font-size: 0.85em;
+    color: #fff; /* لون النص أبيض ليناسب الخلفيات الملونة */
+    background-color: #e0e0e0; /* لون افتراضي (سيتم تجاوزها بألوان الرتب) */
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+/* رأس الرتبة (مثل "المالك", "المدراء" إلخ) */
+/* رأس الرتبة (مثل "المالك", "المدراء" إلخ) */
+/* رأس الرتبة (مثل "المالك", "المدراء" إلخ) */
+/* ... (الأنماط الموجودة لديك) ... */
+
+.online-users-modal .rank-header {
+    background-color: #e9e9e9;
+    padding: 8px 20px;
+    margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    
+    /* **التعديل الجديد هنا** */
+    display: flex; /* لترتيب العناصر (الأيقونة والنص) أفقياً */
+    align-items: center; /* لتوسيط العناصر عمودياً */
+    justify-content: center; /* لتوسيط المحتوى أفقياً */
+}
+
+/* نمط عنوان الرتبة داخل الرأس */
+.online-users-modal .rank-header h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+    margin-right: 8px; /* إضافة مسافة بين الأيقونة والنص */
+}
+
+/* نمط الأيقونة (إذا كنت تستخدم Font Awesome) */
+.online-users-modal .rank-header i {
+    font-size: 1.2em; /* حجم الأيقونة أكبر قليلاً */
+}
+
+/* ... (ألوان الخلفية لرؤوس الرتب كما هي) ... */
+
+/* ألوان خلفية لرؤوس الرتب */
+
+/* ... (الأنماط الأخرى تبقى كما هي) ... */
+
+/* ألوان الخلفية لرؤوس الرتب بتدرجات لونية */
+/* تأكد من أن هذا النمط يطبق على h3 داخل rank-header */
+/* الآن، سنقوم بضبط الألوان المتدرجة فقط */
+
+.online-users-modal .rank-header[data-rank="المالك"] {
+    background: linear-gradient(135deg, #c0392b, #e74c3c); /* أحمر داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="اونر اداري"] {
+    background: linear-gradient(135deg, #d35400, #e67e22); /* برتقالي داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="اونر"] {
+    background: linear-gradient(135deg, #f1c40f, #f39c12); /* أصفر إلى برتقالي */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="سوبر اداري"] {
+    background: linear-gradient(135deg, #2980b9, #3498db); /* أزرق داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="مشرف"] {
+    background: linear-gradient(135deg, #16a085, #1abc9c); /* فيروزي داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="سوبر ادمن"] {
+    background: linear-gradient(135deg, #27ae60, #2ecc71); /* أخضر داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="ادمن"] {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6); /* بنفسجي داكن إلى فاتح */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="بريميوم"] {
+    background: linear-gradient(135deg, #3498db, #54b4eb); /* أزرق سماوي */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="بلاتينيوم"] {
+    background: linear-gradient(135deg, #bdc3c7, #ecf0f1); /* رمادي فضي */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="ملكي"] {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe); /* بنفسجي ملكي */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="ذهبي"] {
+    background: linear-gradient(135deg, #f39c12, #f5b041); /* ذهبي لامع */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="برونزي"] {
+    background: linear-gradient(135deg, #966f3f, #c0895c); /* برونزي */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="عضو"] {
+    background: linear-gradient(135deg, #34495e, #536f8e); /* رمادي أزرق داكن */
+    border-radius: 20px;
+}
+
+.online-users-modal .rank-header[data-rank="زائر"] {
+    background: linear-gradient(135deg, #7f8c8d, #bdc3c7); /* رمادي داكن */
+    border-radius: 20px;
+}
+
+/* نمط عنوان الرتبة داخل الرأس */
+.online-users-modal .rank-header h3 {
+    margin: 0;
+    font-size: 1em;
+    color: #fff; /* **هذا هو التعديل الرئيسي لضمان أن يكون لون الخط أبيضًا** */
+    margin-right: 8px; 
+}
+
+
+/* يمكنك إضافة أي رتب أخرى لديك بنفس النمط */
+/*
+.online-users-modal .rank-header[data-rank="اسم_الرتبة_هنا"] {
+    background-color: #كود_اللون_هنا;
+    color: #لون_النص_هنا;
+}
+*/
+/* تنسيقات لمربع رسالة الترحيب الجديد في مودال المتصلين */
+.online-users-modal .welcome-message-box {
+    text-align: center; /* توسيط النص */
+    padding: 10px 15px; /* مسافة داخلية */
+    margin: 10px auto; /* مسافة خارجية من الأعلى والأسفل وتوسيط أفقي */
+    background-color: #dff0d8; /* لون خلفية أخضر فاتح (يمكنك تغييره) */
+    color: #3c763d; /* لون نص أخضر داكن */
+    border: 1px solid #d6e9c6; /* حدود رقيقة بنفس لون الخلفية */
+    border-radius: 8px; /* حواف دائرية */
+    font-size: 0.95em; /* حجم خط أصغر قليلاً */
+    max-width: calc(100% - 30px); /* عرض أقصى مع بعض الهوامش */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* ظل خفيف */
+}
+
+/* تنسيقات قائمة المستخدمين المتصلين (للتأكد من عدم وجود هوامش علوية تدفع للأسفل) */
+.online-users-modal .online-users-list {
+    margin-top: 0; /* **مهم: إزالة أي هامش علوي يدفع القائمة لأسفل** */
+    padding-top: 0; /* **مهم: إزالة أي مسافة داخلية علوية تدفع المحتوى لأسفل** */
+    flex-grow: 1; /* السماح للقائمة بملء المساحة المتبقية */
+    overflow-y: auto; /* السماح بالتمرير إذا كان المحتوى أكبر من المساحة */
+    display: flex; /* لضمان أن العناصر الداخلية لا تسبب مسافات غير مرغوبة */
+    flex-direction: column;
+}
+
+/* تنسيقات رسالة التحميل داخل قائمة المستخدمين (إذا كانت هذه هي المساحة التي تقصدها) */
+.online-users-modal .online-users-list > div {
+    /* هذا يستهدف رسالة "جاري تحميل المستخدمين..." */
+    margin-top: 0; /* إزالة أي هامش علوي */
+    padding-top: 10px; /* **يمكنك تعديل هذه المسافة إذا أردت مسافة من أعلى القائمة** */
+}
+
+/* ألوان الرتب (تأكد من مطابقتها لما لديك في constants.js) */
+
+/* تنسيقات جديدة لأزرار رأس مودال المتصلين */
+/* تنسيقات أزرار رأس مودال المتصلين لتكون مثل الصورة */
+/* هذا هو الكود من ردي السابق الذي يجب أن يكون في style.css لديك */
+.online-users-modal .new-header-buttons {
+    display: flex;
+    justify-content: space-between; /* هذه الخاصية هي التي تضع المحتوى في اليمين وزر الإغلاق في أقصى اليسار (لصفحات RTL) */
+    align-items: center;
+    padding: 5px 5px; /* تم التعديل: تقليل المسافة الداخلية للرأس بشكل أكبر لتوفير مساحة */
+    background-color: #6a0dad; /* **تم التعديل: لون الخلفية بنفسجي داكن** */
+    border-bottom: 1px solid #5a0c9b; /* **تم التعديل: لون حدود أغمق قليلاً ليتناسق مع البنفسجي** */
+    min-height: 38px; /* تم التعديل: تقليل الارتفاع الأدنى للرأس */
+}
+
+.online-users-modal .header-buttons-container {
+    display: flex;
+    gap: 4px; /* تم التعديل: تقليل المسافة بين الأزرار إلى الحد الأدنى */
+    flex-grow: 1;
+    justify-content: flex-start; /* محاذاة الأزرار إلى اليمين داخل حاويتها */
+    align-items: center;
+}
+
+.online-users-modal .header-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0.1); /* **تم التعديل: خلفية شفافة خفيفة للأزرار** */
+    color: #fff; /* **تم التعديل: نص أبيض ليناسب الخلفية البنفسجية** */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* **تم التعديل: حدود فاتحة شفافة** */
+    padding: 1px 6px; /* تم التعديل: تقليل المسافة الداخلية للأزرار إلى أقصى حد */
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.65em;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: none; /* **تم التعديل: إزالة الظل أو جعله أفتح ليتناسق مع اللون البنفسجي** */
+    min-width: 40px;
+    height: 32px;
+}
+
+.online-users-modal .header-btn .icon {
+    font-size: 1em;
+    margin-bottom: 0px;
+    line-height: 1;
+}
+
+.online-users-modal .header-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* **تم التعديل: خلفية شفافة أغمق عند التحويم** */
+    border-color: rgba(255, 255, 255, 0.5); /* **تم التعديل: حدود أفتح عند التحويم** */
+    box-shadow: none; /* أو ظل خفيف جداً بلون بنفسجي أغمق */
+}
+
+.online-users-modal .new-header-buttons .close-btn {
+    background: none;
+    border: none;
+    color: #fff; /* **تم التعديل: لون أبيض لرمز الإغلاق** */
+    font-size: 1.3em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 2px;
+    transition: color 0.2s ease;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.online-users-modal .new-header-buttons .close-btn:hover {
+    color: #eee; /* **تم التعديل: لون أبيض أفتح عند التحويم** */
+}
+
+.rooms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.room-item {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ... (الأنماط الأخرى تبقى كما هي) ... */
+
+.room-info {
+    display: flex;
+    flex-direction: row; /* تم تغييرها إلى صف */
+    align-items: center; /* لتوسيط العناصر عمودياً */
+    gap: 10px; /* مسافة بين اسم الغرفة وعدد المستخدمين */
+}
+
+.room-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.room-user-count {
+    font-size: 14px;
+    color: #888;
+    /* تمت إزالة margin-top لعدم الحاجة إليه */
+}
+
+.room-user-count i {
+    margin-left: 5px; /* مسافة بين الأيقونة والعدد */
+}
+
+/* ... (بقية الأنماط) ... */
+
+/* في ملف style.css */
+
+.online-users-modal {
+    /* ... (احتفظ بالأنماط الموجودة لتحديد الموضع، الخلفية، الحجم، إلخ) ... */
+    display: flex; /* اجعله flex container */
+    flex-direction: column; /* لترتيب العناصر عمودياً: Header ثم Content Area */
+    /* تأكد من أن الارتفاع والقاعدة ثابتين ليظل المودال مرئياً */
+    /* height: 80%; */ /* مثال: يمكنك تعيين ارتفاع ثابت أو أقصى ارتفاع */
+    /* bottom: 10px; */ /* مثال: موضع المودال من الأسفل */
+}
+
+.online-users-modal .modal-header {
+    /* ... (احتفظ بأنماط الـ header) ... */
+    flex-shrink: 0; /* تأكد من أن الـ header لا يتقلص ويحتفظ بارتفاعه */
+}
+
+.online-users-modal .modal-content-area {
+    flex-grow: 1; /* اجعل منطقة المحتوى تأخذ المساحة المتبقية */
+    overflow-y: auto; /* للسماح بالتمرير داخل المحتوى إذا كان طويلاً */
+    /* يمكنك إضافة padding إذا لزم الأمر */
+}
+
+.welcome-message-box {
+    padding: 15px;
+    text-align: center;
+    color: #eee;
+    background-color: #3a3a3a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.search-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    position: sticky; /* لجعل حقل البحث ثابتاً في الأعلى عند التمرير */
+    top: 0; /* مهم لجعل sticky يعمل */
+    z-index: 10; /* لضمان ظهوره فوق العناصر الأخرى عند التمرير */
+}
+
+.search-input-container input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #eee;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.search-input-container input::placeholder {
+    color: #aaa;
+}
+
+#clear-search-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0 5px;
+    display: none;
+}
+
+.search-results-list {
+    flex-grow: 1;
+    overflow-y: auto; /* إذا أردت تمرير النتائج بشكل منفصل عن حقل البحث */
+    padding: 10px;
+    /* استخدم نفس أنماط .online-users-list إذا كانت مناسبة لتنسيق عناصر المستخدمين */
+}
+
+.rank-header {
+    background-color: #444;
+    color: #fff;
+    padding: 8px 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+    position: sticky; /* لجعل رؤوس الرتب ثابتة عند التمرير */
+    top: 0; /* مهم لجعل sticky يعمل */
+    z-index: 5; /* أقل من حقل البحث */
+}
+
+.user-rank-image {
+    width: 16px; /* أو الحجم الذي تراه مناسباً */
+    height: 16px; /* أو الحجم الذي تراه مناسباً */
+    margin-left: 5px; /* مسافة بين اسم المستخدم والصورة */
+    vertical-align: middle; /* لمحاذاة الصورة مع النص */
+}
+
+/* css/style.css */
+
+/* ... (بقية أكواد CSS لديك) ... */
+
+/* قواعد إخفاء الأزرار افتراضياً لمنع الوميض عند التحميل */
+
+/* إخفاء زر البلاغ افتراضياً مع الحفاظ على مساحته */
+.top-bar .btn.report {
+    visibility: hidden;
+    pointer-events: none; /* لضمان عدم قابليته للنقر وهو مخفي */
+    background: linear-gradient(117deg, #ffd147, #ff8100); /* من فئة head_option4 */
+}
+
+/* إخفاء زر الخاص افتراضياً (سيظهر إذا لم يكن المستخدم زائراً) */
+.top-bar .btn.private {
+    display: flex;
+}
+
+/* إخفاء زر التسجيل افتراضياً (يجب أن يكون مخفياً في HTML أيضاً) */
+.top-bar .btn.register {
+    display: none;
+}
+
+/* css/style.css */
+
+/* ... (بقية أكواد CSS لديك) ... */
+
+/* إخفاء زر "بدء خاص" افتراضياً داخل مودال معلومات المستخدم لمنع الوميض */
+.user-info-modal .modal-button.start-private {
+    display: none; /* سيقوم هذا بإخفاء الزر تماماً عند تحميل المودال */
+}
+
+.profile-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* **تم التعديل: أصبح absolute ليظهر كمنبثق** */
+  /* top و right لن يتم تحديدهما هنا، بل في JavaScript */
+  width: 280px; /* عرض ثابت للمودال */
+  height: auto; /* الارتفاع ديناميكي حسب المحتوى */
+  max-height: calc(100vh - 40px); /* أقصى ارتفاع للمودال لكي لا يتجاوز الشاشة (مع مسافة من الأعلى والأسفل) */
+  overflow-y: auto; /* للسماح بالتمرير إذا زاد المحتوى عن max-height */
+  background-color: #fefefe;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* ظل عادي للمودال المنبثق */
+  z-index: 1001;
+  border-radius: 12px; /* **تم التعديل: حدود منحنية موحدة للمودال** */
+
+  /* لجعله مخفياً افتراضياً مع تأثير انبثاق */
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95) translateY(-10px); /* **تم التعديل: تأثير تصغير وحركة بسيطة** */
+  transform-origin: top right; /* **تم التعديل: نقطة الأصل للتأثير من أعلى اليمين** */
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* عندما يكون المودال ظاهراً */
+.profile-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0); /* **تم التعديل: يظهر بالحجم الطبيعي بدون حركة** */
+}
+
+/* محتوى القائمة المنبثقة (ليصبح محتوى الشريط الجانبي) */
+.profile-dropdown-content {
+  padding: 0; /* **تم التعديل: إزالة البادينج الأساسي، سيتم وضع البادينج في الأقسام الداخلية** */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto; /* للسماح بالتمرير إذا كان المحتوى طويلاً */
+  padding-bottom: 20px; /* **اختياري: مسافة سفلية للمحتوى** */
+}
+
+/* قسم الرأس (الصورة، الرتبة، الاسم) - تم تصغيره */
+/* قسم الرأس (الصورة، الرتبة، الاسم) */
+.profile-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, #007bff, #0056b3); /* تدرج أزرق جذاب */
+    color: white;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    gap: 8px; /* **تمت الإضافة: مسافة 8 بكسل بين عناصر Flexbox (الصورة وكتلة المعلومات)** */
+    flex-direction: row-reverse; /* **تم التعديل: لعكس الترتيب وجعل الصورة على اليمين** */
+}
+
+/* تنسيقات صورة البروفايل داخل الشريط - تم تصغيرها */
+#modal-profile-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* حاوية لمعلومات البروفايل (الرتبة والاسم) */
+.profile-info {
+    flex-grow: 1; /* تم التعديل: ليأخذ كل المساحة المتاحة */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* **تم التعديل: لمحاذاة الرتبة والاسم لليسار** */
+}
+
+/* تنسيقات عنصر الرتبة */
+.profile-rank-display {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* **تم التعديل: لمحاذاة النص لليسار** */
+    font-size: 0.8em;
+    background-color: rgba(255, 255, 255, 0.2); /* خلفية بيضاء شفافة */
+    color: white; /* لون النص يصبح أبيض */
+    border-radius: 5px; /* حواف دائرية للرتبة */
+    padding: 2px 8px; /* مسافة داخلية مناسبة */
+    margin-bottom: 3px;
+    flex-direction: row; /* **تم التعديل: لإعادة الترتيب الطبيعي للأيقونة والنص** */
+    white-space: nowrap; /* تم الإضافة: يمنع النص من النزول لسطر جديد */
+    overflow: hidden; /* تم الإضافة: لإخفاء النص الزائد */
+    text-overflow: ellipsis; /* تم الإضافة: لإظهار نقاط (...) */
+}
+
+.profile-rank-display .rank-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px; /* **تم التعديل: لنقل الهامش إلى اليمين** */
+    margin-left: 0;
+    vertical-align: middle;
+}
+
+/* تنسيقات اسم المستخدم */
+#modal-username-display {
+    font-size: 1.1em;
+    color: white;
+    margin: 0; /* تأكد من عدم وجود هوامش إضافية */
+    font-weight: bold;
+    text-align: left; /* **تم التعديل: للتأكيد على المحاذاة لليسار** */
+    white-space: nowrap; /* تم الإضافة: يمنع النص من النزول لسطر جديد */
+    overflow: hidden; /* تم الإضافة: لإخفاء النص الزائد */
+    text-overflow: ellipsis; /* تم الإضافة: لإظهار نقاط (...) */
+    flex-grow: 1; /* تم الإضافة: ليأخذ كل المساحة المتاحة */
+}
+
+/* قسم الأزرار */
+.profile-buttons-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px; /* بادينج جانبي للأزرار فقط */
+}
+/* تنسيقات الأزرار داخل القائمة المنبثقة */
+.profile-dropdown-content .modal-button {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* تدرج لوني خفيف */
+  color: #333;
+  padding: 12px 15px;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 12px;
+  transition: all 0.3s ease; /* تغيير جميع الانتقالات لتكون سلسة */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: right;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.08); /* ظل أكثر وضوحاً */
+}
+
+/* عند التحويم */
+.profile-dropdown-content .modal-button:hover {
+  background: linear-gradient(135deg, #e9ecef, #adb5bd); /* تدرج أغمق عند التحويم */
+  color: #000;
+  border-color: #adb5bd;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* ظل أكبر عند التحويم */
+  transform: translateY(-2px); /* تأثير رفع خفيف للزر */
+}
+
+/* تنسيقات الأيقونات داخل الأزرار */
+.profile-dropdown-content .modal-button .icon {
+    font-size: 1.4em;
+    margin-left: 10px;
+    color: #007bff; /* لون الأيقونة أزرق */
+}
+
+/* إذا كنت تريد أي نص إضافي داخل المودال */
+.profile-dropdown-content p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 0.9em;
+}
+
+/* لتحديد موضع زر البروفايل وجعله مرجعاً للموضع المطلق (هذا يبقى كما هو) */
+.top-bar .profile {
+  position: relative;
+  cursor: pointer;
+}
+
+/* أنماط مودال معلومات المستوى */
+.level-info-modal {
+    position: fixed;
+    /* التعديل 1: ليكون أعلى قليلاً */
+    top: 10%;
+    /* التعديل 2: للحفاظ على مسافة من الجوانب */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+    direction: rtl;
+}
+
+.level-info-modal.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+.level-info-modal .modal-content h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.level-info-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #999;
+    cursor: pointer;
+}
+
+.level-info-card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+}
+
+.level-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 5px;
+}
+
+.level-item:last-of-type { /* تم التعديل لاستهداف آخر عنصر من نفس النوع */
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.level-item .label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.level-item .value {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    transition: width 0.5s ease-in-out;
+}
+
+/* زر الإغلاق الجديد */
+.level-info-modal .close-button-footer {
+    width: 60px;
+    height: 40px;
+    background-color: #6a0dad;
+    color: white;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* إزالة position: absolute; *//* ... */
+    margin-top: 15px;
+    margin-left: auto; /* هذا هو التعديل. سيتم دفع الزر إلى اليسار. */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.level-info-modal .close-button-footer:hover {
+    background-color: #5d0c9b;
+}
+
+.level-info-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* لمحاذاة المحتوى والأزرار إلى اليمين */
+    width: 100%; /* هذا هو التعديل. سيجعل المحتوى يأخذ العرض الكامل. */
+}
+
+
+/* تنسيق بطاقة المعلومات لتأخذ العرض الكامل */
+.level-info-modal .level-info-card {
+    width: 90%;
+    /* ... (بقية الأنماط) ... */
+}
+
+/* الخلفية المعتمة للمودال */
+.level-info-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* لون أسود مع شفافية */
+    backdrop-filter: blur(5px); /* تأثير ضبابي على المحتوى الخلفي */
+    z-index: 1499; /* يجب أن يكون أقل من z-index للمودال */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.level-info-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* تنسيق شارة المستوى على صورة البروفايل */
+/* تصميم شريط المستوى أسفل الصورة */
+.message-avatar {
+    position: relative;
+    /* لجعل الشريط يظهر بشكل صحيح */
+    overflow: visible; 
+}
+
+.level-badge {
+    position: absolute;
+    bottom: -3px; /* يوضع أسفل الصورة */
+    left: 50%;
+    transform: translateX(-50%); /* لتوسيط الشريط أفقياً */
+    background-color: #000; /* تصحيح لون الخلفية */
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2.5px 20px; /* حجم الشريط */
+    border-radius: 4px; /* تصحيح حواف دائرية قليلاً */
+    border: 1px solid #fff; /* حدود بيضاء */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 500;
+}
+
+/* هذا يضمن أن العنصر الأب يمكنه تحديد موضع العناصر الداخلية */
+.top-bar .btn.private {
+  position: relative; 
+}
+
+/* هذا الكود هو الذي ينشئ الدائرة الحمراء */
+.top-bar .btn.private.has-new-messages::after {
+  content: '';
+  position: absolute;
+  top: 2px; /* يمكنك تعديل هذه القيمة لتغيير الموضع الرأسي */
+  left: 2px; /* يمكنك تعديل هذه القيمة لتغيير الموضع الأفقي */
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  border: 1px solid white; /* لجعلها أكثر وضوحاً */
+  z-index: 10;
+}
+
+/* تصميم زر الرسائل الخاصة داخل المودال */
+.private-chat-list li {
+    position: relative; /* مهم جدا لتحديد موقع الدائرة */
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+/* تصميم دائرة الرسائل غير المقروءة */
+.private-chat-list .unread-count {
+    position: absolute;
+    left: 33px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: red;
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+/* style.css */
+
+/* ... (بقية التنسيقات الموجودة) */
+
+/* style.css */
+
+/* ... (بقية التنسيقات الموجودة) */
+
